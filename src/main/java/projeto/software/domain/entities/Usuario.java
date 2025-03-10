@@ -33,6 +33,14 @@ public class Usuario {
     @Column(nullable = false, length = 8)
     private String senha;
 
-    @Column(name = "tipo_usuario")
-    private Integer tipoUsuario;
+    @Column(length = 500)
+    private String historico;
+
+    @Column(length = 500)
+    private String qualificacoes;
+
+    @Column(nullable = false, length = 500)
+    private String experiencia;
+
+    private int disponibilidade 
 }
