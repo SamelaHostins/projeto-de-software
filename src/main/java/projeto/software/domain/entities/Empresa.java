@@ -10,22 +10,20 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "empresa", schema = "projeto")
-@Getter
-@Setter
 @NoArgsConstructor // Construtor vazio (necessário para JPA)
 @AllArgsConstructor // Construtor com todos os atributos
 public class Empresa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idEmpresa;
+    private @Getter @Setter UUID idEmpresa;
 
     @Column(nullable = false, length = 255)
-    private String nome;
+    private @Getter @Setter String nome;
 
     @Column(length = 255)
-    private String setor;
+    private @Getter @Setter String setor;
 
     @Column(length = 500)
-    private String descricao;
+    private @Getter @Setter String descricao;
 }

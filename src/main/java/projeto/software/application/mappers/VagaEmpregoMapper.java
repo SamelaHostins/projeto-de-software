@@ -4,7 +4,7 @@ import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 
 import jakarta.inject.Named;
-import projeto.software.application.dtos.CriarVagaEmpregoDTO;
+import projeto.software.application.dtos.dtosVagaEmprego.CriarVagaEmpregoDTO;
 import projeto.software.domain.entities.VagaEmprego;
 
 @Mapper(componentModel = "cdi")

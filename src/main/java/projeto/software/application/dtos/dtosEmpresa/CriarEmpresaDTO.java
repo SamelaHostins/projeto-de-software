@@ -1,20 +1,17 @@
-package projeto.software.application.dtos;
+package projeto.software.application.dtos.dtosEmpresa;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class CriarVagaEmpregoDTO {
+public class CriarEmpresaDTO {
 
-    private String titulo;
+    private String nome;
+    private String setor;
     private String descricao;
-    private String requisitos;
-    private UUID idEmpresa;
 }
-

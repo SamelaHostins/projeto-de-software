@@ -1,8 +1,12 @@
 package projeto.software.application.resources;
 
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
+
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -11,17 +15,14 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
-import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-
-import org.eclipse.microprofile.openapi.annotations.Operation;
-import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
-import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
-import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import projeto.software.application.dtos.dtosUsuario.BuscarUsuarioDTO;
+import projeto.software.application.dtos.dtosUsuario.CriarUsuarioDTO;
+import projeto.software.application.services.interfaces.UsuarioService;
 
 @Path("/usuario")
 @Tag(name = "Endpoints do Usuario")
@@ -30,106 +31,71 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 public class UsuarioResource {
 
     @Inject
-    ClienteService clienteService;
+    UsuarioService usuarioService;
 
     private static final org.jboss.logging.Logger LOG = org.jboss.logging.Logger.getLogger(UsuarioResource.class);
 
-    @Operation(summary = "Cadastrando um Cliente")
-    @APIResponse(responseCode = "200", description = "Cliente criado com sucesso!")
+    @Operation(summary = "Cadastrando um Usuario")
+    @APIResponse(responseCode = "200", description = "Usuario criado com sucesso!")
     @APIResponse(responseCode = "500", description = "Ocorreu um erro na requisição.")
     @POST
     @Transactional
     @Path("/cadastrar")
-    public Response cadastrarCliente(@Valid @RequestBody CriarClienteDTO dto) {
+    public Response cadastrarUsuario(@Valid @RequestBody CriarUsuarioDTO dto) {
         try {
-            LOG.info("Requisição recebida - Cadastrar Cliente");
-            CriarClienteDTO clienteDTO = clienteService.cadastrarCliente(dto);
-            return Response.status(200).entity(clienteDTO).build();
+            LOG.info("Requisição recebida - Cadastrar Usuario");
+            CriarUsuarioDTO UsuarioDTO = usuarioService.cadastrarUsuario(dto);
+            return Response.status(200).entity(UsuarioDTO).build();
         } catch (Exception ex) {
             return Response.status(500).entity("Ocorreu um erro na requisição.").build();
         }
     }
 
-    @Operation(summary = "Buscando um cliente")
+    @Operation(summary = "Buscando um Usuario")
     @APIResponse(responseCode = "200", description = "Busca realizada com sucesso!")
-    @APIResponse(responseCode = "404", description = "O cliente não foi encontrado")
+    @APIResponse(responseCode = "404", description = "O Usuario não foi encontrado")
     @GET
-    @Path("/buscar/{id_cliente}")
-    public Response buscarClientePorId(@PathParam("id_cliente") UUID idCliente)
-            throws ValidacaoException {
+    @Path("/buscar/{id_Usuario}")
+    public Response buscarUsuarioPorId(@PathParam("id_Usuario") UUID idUsuario)
+            throws Exception {
         try {
-            LOG.info("Requisição recebida - Buscar o Cliente");
-            BuscarUsuarioDTO clienteDTO = clienteService.buscarClientePorId(idCliente);
-            return Response.status(200).entity(clienteDTO).build();
-        } catch (ValidacaoException ex) {
+            LOG.info("Requisição recebida - Buscar o Usuario");
+            BuscarUsuarioDTO UsuarioDTO = usuarioService.buscarUsuarioPorId(idUsuario);
+            return Response.status(200).entity(UsuarioDTO).build();
+        } catch (Exception ex) {
             return Response.status(404).entity(ex.getMessage()).build();
-        } catch (Exception ex) {
+        } catch (ExceptionInInitializerError ex) {
             return Response.status(500).entity("Ocorreu um erro na requisição.").build();
         }
     }
 
-    @Operation(summary = "Buscando todos os cliente")
+    @Operation(summary = "Buscando todos os Usuario")
     @APIResponse(responseCode = "200", description = "Busca realizada com sucesso!")
     @GET
-    public Response buscarClientes() {
+    public Response buscarUsuarios() {
         try {
-            LOG.info("Requisição recebida - Buscar o Cliente");
-            List<BuscarUsuarioDTO> clienteDTO = clienteService.buscarClientes();
-            return Response.status(200).entity(clienteDTO).build();
+            LOG.info("Requisição recebida - Buscar o Usuario");
+            List<BuscarUsuarioDTO> UsuarioDTO = usuarioService.buscarUsuarios();
+            return Response.status(200).entity(UsuarioDTO).build();
         } catch (Exception ex) {
             return Response.status(500).entity("Ocorreu um erro na requisição.").build();
         }
     }
 
-    @Operation(summary = "Deletando o cadastro de um cliente")
+    @Operation(summary = "Deletando o cadastro de um Usuario")
     @APIResponse(responseCode = "200", description = "Cadastro deletado com sucesso!")
-    @APIResponse(responseCode = "404", description = "O cliente não foi encontrado")
+    @APIResponse(responseCode = "404", description = "O Usuario não foi encontrado")
     @DELETE
     @Transactional
-    @Path("/deletar/{id_cliente}")
-    public Response deletarCliente(@PathParam("id_cliente") UUID idCliente)
-            throws ValidacaoException {
+    @Path("/deletar/{id_Usuario}")
+    public Response deletarUsuario(@PathParam("id_Usuario") UUID idUsuario)
+            throws Exception {
         try {
-            LOG.info("Requisição recebida - Deletar o cadastro do Cliente");
-            clienteService.deletarCliente(idCliente);
+            LOG.info("Requisição recebida - Deletar o cadastro do Usuario");
+            usuarioService.deletarUsuario(idUsuario);
             return Response.status(200).build();
-        } catch (ValidacaoException ex) {
+        } catch (Exception ex) {
             return Response.status(404).entity(ex.getMessage()).build();
-        } catch (Exception ex) {
-            return Response.status(500).entity("Ocorreu um erro na requisição.").build();
-        }
-    }
-
-    @Operation(summary = "Atualizando o cadastro de um cliente")
-    @APIResponse(responseCode = "200", description = "Cadastro atualizado com sucesso!")
-    @APIResponse(responseCode = "404", description = "O cliente não foi encontrado")
-    @PUT
-    @Transactional
-    @Path("/atualizar/{id_cliente}")
-    public Response atualizarCliente(@RequestBody AtualizarClienteDTO clienteDTO)
-            throws ValidacaoException {
-        try {
-            LOG.info("Requisição recebida - Atualizar o cadastro do Cliente");
-            AtualizarClienteDTO clienteAtualizado = clienteService.atualizarCliente(clienteDTO);
-            return Response.status(200).entity(clienteAtualizado).build();
-        } catch (ValidacaoException ex) {
-            return Response.status(404).entity(ex.getMessage()).build();
-        } catch (Exception ex) {
-            return Response.status(500).entity("Ocorreu um erro na requisição.").build();
-        }
-    }
-
-    @Operation(summary = "Buscando as faixas etarias das clientes cadastradas")
-    @APIResponse(responseCode = "200", description = "Busca realizada com sucesso!")
-    @GET
-    @Path("/faixas-etarias")
-    public Response obterFaixasEtariasDasClientes() {
-        try {
-            LOG.info("Requisição recebida - Buscar as faixas etarias das clientes cadastradas");
-            Map<String, Integer> faixasEtarias = clienteService.obterFaixasEtariasDasClientes();
-            return Response.status(200).entity(faixasEtarias).build();
-        } catch (Exception ex) {
-            return Response.status(500).entity("Ocorreu um erro na requisição.").build();
         }
     }
 }

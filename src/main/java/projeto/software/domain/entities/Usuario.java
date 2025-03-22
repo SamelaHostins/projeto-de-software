@@ -12,51 +12,49 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "usuario", schema = "projeto")
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idUsuario;
+    private @Getter @Setter UUID idUsuario;
 
     @Column(nullable = false, length = 25)
-    private String nome;
+    private  @Getter @Setter String nome;
 
     @Column(nullable = false, length = 25)
-    private String sobrenome;
+    private  @Getter @Setter String sobrenome;
 
     @Column(name = "data_nascimento", nullable = false)
-    private LocalDate dataNascimento;
+    private @Getter @Setter LocalDate dataNascimento;
 
     @Column(nullable = false, unique = true, length = 30)
-    private String email;
+    private  @Getter @Setter String email;
 
     @Column(nullable = false, unique = true, length = 12)
-    private String telefone;
+    private  @Getter @Setter String telefone;
 
     @Column(name = "login_usuario", nullable = false, unique = true, length = 25)
-    private String loginUsuario;
+    private  @Getter @Setter String loginUsuario;
 
     @Column(nullable = false, length = 8)
-    private String senha;
+    private  @Getter @Setter String senha;
 
     @Column(length = 500)
-    private String historico;
+    private  @Getter @Setter String historico;
 
     @Column(length = 500)
-    private String qualificacoes;
+    private  @Getter @Setter String qualificacoes;
 
     @Column(nullable = false, length = 500)
-    private String experiencia;
+    private  @Getter @Setter String experiencia;
 
     @Column(nullable = false)
-    private int disponibilidade;
+    private @Getter @Setter int disponibilidade;
 
     // armazena as vagas nas quais o usuário está inscrito.
     @ManyToMany
     @JoinTable(name = "inscricao_vaga", schema = "projeto", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_vaga"))
-    private List<VagaEmprego> vagasInscritas;
+    private @Getter @Setter List<VagaEmprego> vagasInscritas;
 }

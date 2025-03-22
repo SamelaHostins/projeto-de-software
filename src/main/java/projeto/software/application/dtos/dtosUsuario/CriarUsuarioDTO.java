@@ -1,13 +1,13 @@
-package projeto.software.application.dtos;
+package projeto.software.application.dtos.dtosUsuario;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import projeto.software.application.dtos.dtosVagaEmprego.VagaEmpregoDTO;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,11 +25,11 @@ public class CriarUsuarioDTO {
     private String qualificacoes;
     private String experiencia;
     private int disponibilidade;
-    private List<UUID> vagasInscritas; // Apenas IDs das vagas
+    private List<VagaEmpregoDTO> vagasInscritas; 
 
     public void UsuarioDTO(String nome, String sobrenome, LocalDate dataNascimento, 
                       String email, String telefone, String loginUsuario, String historico, 
-                      String qualificacoes, String experiencia, int disponibilidade, List<UUID> vagasInscritas) {
+                      String qualificacoes, String experiencia, int disponibilidade, List<VagaEmpregoDTO> vagasInscritas) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.dataNascimento = dataNascimento;

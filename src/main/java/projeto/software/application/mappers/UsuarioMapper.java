@@ -7,7 +7,8 @@ import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Named;
 
-import projeto.software.application.dtos.CriarUsuarioDTO;
+import projeto.software.application.dtos.dtosUsuario.BuscarUsuarioDTO;
+import projeto.software.application.dtos.dtosUsuario.CriarUsuarioDTO;
 import projeto.software.domain.entities.Usuario;
 
 @Mapper(componentModel = "cdi")
@@ -18,6 +19,11 @@ public interface UsuarioMapper {
 
     @InheritInverseConfiguration
     CriarUsuarioDTO fromEntityToDto(Usuario entity);
+
+    Usuario fromDtoBuscarToEntity(BuscarUsuarioDTO dto);
+
+    @InheritInverseConfiguration
+    BuscarUsuarioDTO fromEntityToDtoBuscar(Usuario entity);
 
     @IterableMapping(qualifiedByName = "fromDtoToEntity")
     @Named("fromDtoListToEntityList")

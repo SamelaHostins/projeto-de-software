@@ -16,22 +16,22 @@ public class VagaEmprego {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idVaga;
+    private @Getter @Setter UUID idVaga;
 
     @Column(nullable = false, length = 255)
-    private String titulo;
+    private @Getter @Setter String titulo;
 
     @Column(length = 500)
-    private String descricao;
+    private @Getter @Setter String descricao;
 
     @Column(length = 500)
-    private String requisitos;
+    private @Getter @Setter String requisitos;
 
     @ManyToOne
     @JoinColumn(name = "id_empresa", nullable = false)
-    private Empresa empresa;
+    private @Getter @Setter Empresa empresa;
 
     // Armazena os usuários inscritos na vaga
     @ManyToMany(mappedBy = "vagasInscritas")
-    private List<Usuario> usuarios;
+    private @Getter @Setter List<Usuario> usuarios;
 }

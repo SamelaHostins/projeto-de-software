@@ -1,10 +1,10 @@
-package salao.online.application.services.interfaces;
+package projeto.software.application.services.interfaces;
 
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
-import projeto.software.application.dtos.CriarUsuarioDTO;
+import projeto.software.application.dtos.dtosUsuario.BuscarUsuarioDTO;
+import projeto.software.application.dtos.dtosUsuario.CriarUsuarioDTO;
 
 public interface UsuarioService {
 

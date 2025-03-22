@@ -1,4 +1,4 @@
-package projeto.software.application.dtos;
+package projeto.software.application.dtos.dtosUsuario;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import projeto.software.application.dtos.dtosVagaEmprego.VagaEmpregoDTO;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,5 +28,5 @@ public class BuscarUsuarioDTO {
     private String qualificacoes;
     private String experiencia;
     private int disponibilidade;
-    private List<VagaDTO> vagasInscritas;
+    private List<VagaEmpregoDTO> vagasInscritas;
 }

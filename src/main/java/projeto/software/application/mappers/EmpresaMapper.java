@@ -4,7 +4,7 @@ import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 
 import jakarta.inject.Named;
-import projeto.software.application.dtos.CriarEmpresaDTO;
+import projeto.software.application.dtos.dtosEmpresa.CriarEmpresaDTO;
 import projeto.software.domain.entities.Empresa;
 
 @Mapper(componentModel = "cdi")
