@@ -1,10 +1,19 @@
 package projeto.software.domain.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
 import java.util.UUID;
 
 @Entity
 @Table(name = "empresa", schema = "projeto")
+@Getter
+@Setter
+@NoArgsConstructor // Construtor vazio (necessário para JPA)
+@AllArgsConstructor // Construtor com todos os atributos
 public class Empresa {
 
     @Id
@@ -20,4 +29,3 @@ public class Empresa {
     @Column(length = 500)
     private String descricao;
 }
-

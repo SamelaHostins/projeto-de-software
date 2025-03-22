@@ -1,11 +1,21 @@
 package projeto.software.domain.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 import java.util.UUID;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "usuario", schema = "projeto")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Usuario {
 
     @Id
@@ -44,4 +54,9 @@ public class Usuario {
 
     @Column(nullable = false)
     private int disponibilidade;
+
+    // armazena as vagas nas quais o usuário está inscrito.
+    @ManyToMany
+    @JoinTable(name = "inscricao_vaga", schema = "projeto", joinColumns = @JoinColumn(name = "id_usuario"), inverseJoinColumns = @JoinColumn(name = "id_vaga"))
+    private List<VagaEmprego> vagasInscritas;
 }
