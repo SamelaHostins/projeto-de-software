@@ -1,16 +1,14 @@
 package projeto.software.application.mappers;
 
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
-
-import projeto.software.application.dtos.CriarUsuarioDTO;
-import projeto.software.domain.entities.Usuario;
+import java.util.List;
 
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.Named;
 
-import java.util.List;
+import projeto.software.application.dtos.CriarUsuarioDTO;
+import projeto.software.domain.entities.Usuario;
 
 @Mapper(componentModel = "cdi")
 public interface UsuarioMapper {

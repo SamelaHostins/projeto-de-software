@@ -42,5 +42,6 @@ public class Usuario {
     @Column(nullable = false, length = 500)
     private String experiencia;
 
-    private int disponibilidade 
+    @Column(nullable = false)
+    private int disponibilidade;
 }
