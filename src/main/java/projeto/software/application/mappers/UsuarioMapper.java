@@ -25,6 +25,8 @@ public interface UsuarioMapper {
     @InheritInverseConfiguration
     BuscarUsuarioDTO fromEntityToDtoBuscar(Usuario entity);
 
+    List<BuscarUsuarioDTO> toUsuarioDTOList(List<Usuario> usuarios);
+
     @IterableMapping(qualifiedByName = "fromDtoToEntity")
     @Named("fromDtoListToEntityList")
     List<Usuario> fromDtoListToEntityList(List<CriarUsuarioDTO> dtos);

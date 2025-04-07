@@ -1,18 +1,28 @@
 package projeto.software.application.mappers;
 
-import org.mapstruct.InheritInverseConfiguration;
-import org.mapstruct.Mapper;
+import java.util.List;
 
-import jakarta.inject.Named;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+
+import projeto.software.application.dtos.dtosVagaEmprego.BuscarVagaEmpregoDTO;
 import projeto.software.application.dtos.dtosVagaEmprego.CriarVagaEmpregoDTO;
+import projeto.software.application.dtos.dtosVagaEmprego.VagaEmpregoDTO;
 import projeto.software.domain.entities.VagaEmprego;
 
 @Mapper(componentModel = "cdi")
 public interface VagaEmpregoMapper {
-    
-    @Named("fromEntityToDto")
+
     CriarVagaEmpregoDTO fromEntityToDto(VagaEmprego entity);
 
-    @InheritInverseConfiguration
-    VagaEmprego fromDtoToEntity(CriarVagaEmpregoDTO dto);
+    @Mapping(target = "empresa", ignore = true)
+    @Mapping(target = "usuarios", ignore = true)
+    VagaEmprego toEntity(CriarVagaEmpregoDTO dto);
+
+    @Mapping(source = "empresa.idEmpresa", target = "idEmpresa")
+    BuscarVagaEmpregoDTO toBuscarDTO(VagaEmprego vaga);
+
+    VagaEmpregoDTO toDTO(VagaEmprego vaga);
+
+    List<VagaEmpregoDTO> toDTOList(List<VagaEmprego> vagas);
 }
