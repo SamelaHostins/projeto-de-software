@@ -18,6 +18,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_usuario")
     private @Getter @Setter UUID idUsuario;
 
     @Column(nullable = false, length = 25)

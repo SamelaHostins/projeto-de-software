@@ -13,7 +13,11 @@ INSERT INTO projeto.usuario (
 (gen_random_uuid(), 'Mariana', 'Souza', '1995-08-22', 'mariana@email.com', '11976543210',
  'mariana_s', 'Senha456', 'Formada em Design Gráfico', 'Adobe Photoshop, Illustrator', '3 anos como designer', 0);
 
--- Inserindo vagas de emprego
+-- Inserindo vagas de emprego (com ID gerado)
+INSERT INTO projeto.vaga_emprego (id_vaga, titulo, descricao, requisitos, id_empresa)
+SELECT gen_random_uuid(), 'Desenvolvedor Frontend', 'Desenvolvimento de interfaces web', 'Experiência com Angular e React', e.id_empresa
+FROM projeto.empresa e WHERE e.nome = 'Tech Solutions';
+
 INSERT INTO projeto.vaga_emprego (id_vaga, titulo, descricao, requisitos, id_empresa)
 SELECT gen_random_uuid(), 'Engenheiro de Software Backend', 'Desenvolvimento de APIs e microsserviços em Java', 'Experiência com Spring Boot e PostgreSQL', e.id_empresa
 FROM projeto.empresa e WHERE e.nome = 'Tech Solutions';
@@ -38,13 +42,13 @@ INSERT INTO projeto.vaga_emprego (id_vaga, titulo, descricao, requisitos, id_emp
 SELECT gen_random_uuid(), 'Social Media Designer', 'Criação de conteúdo visual para redes sociais', 'Figma, Canva, noções de marketing digital', e.id_empresa
 FROM projeto.empresa e WHERE e.nome = 'Creative Studio';
 
--- Inscrevendo usuários nas vagas (tabela inscricao_vaga)
-INSERT INTO projeto.inscricao_vaga (id_usuario, id_vaga)
-SELECT u.id_usuario, v.id_vaga
+-- Inscrevendo usuários nas vagas (tabela inscricao_vaga com ID gerado)
+INSERT INTO projeto.inscricao_vaga (id_inscricao, id_usuario, id_vaga)
+SELECT gen_random_uuid(), u.id_usuario, v.id_vaga
 FROM projeto.usuario u, projeto.vaga_emprego v
 WHERE u.login_usuario = 'carlos_s' AND v.titulo = 'Desenvolvedor Frontend';
 
-INSERT INTO projeto.inscricao_vaga (id_usuario, id_vaga)
-SELECT u.id_usuario, v.id_vaga
+INSERT INTO projeto.inscricao_vaga (id_inscricao, id_usuario, id_vaga)
+SELECT gen_random_uuid(), u.id_usuario, v.id_vaga
 FROM projeto.usuario u, projeto.vaga_emprego v
 WHERE u.login_usuario = 'mariana_s' AND v.titulo = 'Designer Gráfico';

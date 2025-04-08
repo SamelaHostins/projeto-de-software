@@ -16,6 +16,7 @@ public class Empresa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_empresa")
     private @Getter @Setter UUID idEmpresa;
 
     @Column(nullable = false, length = 255)

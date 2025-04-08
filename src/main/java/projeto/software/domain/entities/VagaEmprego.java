@@ -16,6 +16,7 @@ public class VagaEmprego {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_vaga")
     private @Getter @Setter UUID idVaga;
 
     @Column(nullable = false, length = 255)
